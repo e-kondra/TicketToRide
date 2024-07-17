@@ -31,7 +31,7 @@ public class RouteServiceImpl implements RouteService {
     @Override
     public Route saveRoute(Route route) {
         if (!hasNoMatch(route)) {
-            throw new HttpClientErrorException(HttpStatus.CONFLICT);
+            throw new HttpClientErrorException(HttpStatus.CONFLICT);  //to improve!!!
         }
         return routeRepository.save(route);
     }

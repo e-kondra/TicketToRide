@@ -8,34 +8,31 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
-import java.util.List;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name = "tickets")
-public class Ticket {
-
+@Table(name = "tickets_route")
+public class TicketsRoute {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="ticket_id")
+    @Column(name="id")
     private Long id;
 
-    @OneToMany(mappedBy = "id", fetch = FetchType.LAZY)
-    private List<TicketsRoute> routesChain;
-
-    @Column(name="price")
-    private BigDecimal price;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "route_id")
+    private Route route;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "traveller_id")
-    private Traveller traveller;
+    @JoinColumn(name = "ticket_id")
+    private Ticket ticket;
+
+    @Column(name="serial_number")
+    private int serialNumber;
 }

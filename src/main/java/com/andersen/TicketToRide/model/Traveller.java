@@ -2,33 +2,36 @@ package com.andersen.TicketToRide.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name = "routes")
-public class Route {
+@Table(name = "travellers")
+public class Traveller {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="route_id")
+    @Column(name="traveller_id")
     private Long id;
 
-    @Column(name="start_point")
-    private String startPoint;
+    @Column(name="username")
+    private String username;
 
-    @Column(name="end_point")
-    private String endPoint;
+    @Column(name="password")
+    private String password;
 
-    @Column(name="count_segment")
-    private int numberOfSegments;
-
+    @OneToMany(mappedBy = "traveller", fetch = FetchType.LAZY)
+    private List<Ticket> tickets;
 }
