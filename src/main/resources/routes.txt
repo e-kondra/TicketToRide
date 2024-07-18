@@ -1,0 +1,16 @@
+{"startPoint":"BIRGMINGHAM","endPoint":"COVENTRY","numberOfSegments":1}
+{"startPoint":"BIRGMINGHAM","endPoint":"SWINDON","numberOfSegments":4}
+{"startPoint":"BIRGMINGHAM","endPoint":"BRISTOL","numberOfSegments":3}
+{"startPoint":"COVENTRY","endPoint":"BIRGMINGHAM","numberOfSegments":1}
+{"startPoint":"SWINDON","endPoint":"BIRGMINGHAM","numberOfSegments":4}
+{"startPoint":"BRISTOL","endPoint":"BIRGMINGHAM","numberOfSegments":3}
+{"startPoint":"BRISTOL","endPoint":"SWINDON","numberOfSegments":2}
+{"startPoint":"SWINDON","endPoint":"BRISTOL","numberOfSegments":2}
+{"startPoint":"SWINDON","endPoint":"READING","numberOfSegments":4}
+{"startPoint":"READING","endPoint":"SWINDON","numberOfSegments":4}
+{"startPoint":"READING","endPoint":"LONDON","numberOfSegments":1}
+{"startPoint":"LONDON","endPoint":"READING","numberOfSegments":1}
+{"startPoint":"LONDON","endPoint":"NORTHHAMPTON","numberOfSegments":2}
+{"startPoint":"NORTHHAMPTON","endPoint":"LONDON","numberOfSegments":2}
+{"startPoint":"NORTHHAMPTON","endPoint":"COVENTRY","numberOfSegments":2}
+{"startPoint":"COVENTRY","endPoint":"NORTHHAMPTON","numberOfSegments":2}
