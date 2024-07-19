@@ -36,6 +36,27 @@ public class RouteServiceImpl implements RouteService {
     }
 
     @Override
+    public List<Route> findAllRoutesByStartPointExcludeEndpoints( String from, List<String> excluding) {
+        return routeRepository.findAllByStartPointExcludeEndPoints(from, excluding);
+
+    }
+
+    @Override
+    public List<Route> findAllRoutesByStart( String from) {
+        return routeRepository.findAllByStartPoint(from);
+    }
+
+    @Override
+    public List<Route> findAllByStartPointRangeAndEndPointExcluding( List<String> from, List<String> excluding) {
+        return routeRepository.findAllByStartPointRange(from, excluding);
+    }
+
+    @Override
+    public Route findByStartPointAndEndPoint(String startPoint, String endPoint){
+        return routeRepository.findByStartPointAndEndPoint(startPoint, endPoint);
+    }
+
+    @Override
     public Route saveRoute(Route route) {
         if (!hasNoMatch(route)) {
             throw new HttpClientErrorException(HttpStatus.CONFLICT);  //to improve!!!
@@ -51,7 +72,8 @@ public class RouteServiceImpl implements RouteService {
                         t.getNumberOfSegments() == route.getNumberOfSegments());
     }
 
-    public List<Route> getTicketsFromFile(File file) {
+    @Override
+    public List<Route> loadTicketsFromFile(File file) {
         List<Route> routes = new ArrayList<>();
         try {
             List<String> lines = Files.readAllLines(Paths.get(file.getPath()));

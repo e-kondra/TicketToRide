@@ -15,8 +15,6 @@ public class TicketToRideApplication {
 
 		SpringApplication.run(TicketToRideApplication.class, args);
 
-
-
 	}
 
 }
