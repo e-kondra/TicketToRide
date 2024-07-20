@@ -6,4 +6,6 @@ import java.util.Optional;
 
 public interface TicketService {
     Optional<Ticket> getTicketByOptimalTravel(String from, String to);
+
+    Ticket saveTicket(Ticket ticket);
 }
