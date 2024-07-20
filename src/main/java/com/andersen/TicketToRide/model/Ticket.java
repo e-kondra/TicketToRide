@@ -8,14 +8,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.util.List;
+
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -29,8 +28,11 @@ public class Ticket {
     @Column(name="ticket_id")
     private Long id;
 
-    @OneToMany(mappedBy = "id", fetch = FetchType.LAZY)
-    private List<TicketsRoute> routesChain;
+    @Column(name="travel_points")
+    private String routesChain;
+
+    @Column(name="segments")
+    private Integer segments;
 
     @Column(name="price")
     private BigDecimal price;
@@ -38,4 +40,10 @@ public class Ticket {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "traveller_id")
     private Traveller traveller;
+
+    public Ticket(String routesChain, Integer segments, BigDecimal price) {
+        this.routesChain = routesChain;
+        this.segments = segments;
+        this.price = price;
+    }
 }

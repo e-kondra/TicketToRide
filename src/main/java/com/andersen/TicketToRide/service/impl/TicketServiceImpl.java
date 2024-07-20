@@ -1,6 +1,7 @@
 package com.andersen.TicketToRide.service.impl;
 
 import com.andersen.TicketToRide.model.Route;
+import com.andersen.TicketToRide.model.Ticket;
 import com.andersen.TicketToRide.service.RouteService;
 import com.andersen.TicketToRide.service.TicketService;
 import org.apache.logging.log4j.LogManager;
@@ -23,9 +24,29 @@ public class TicketServiceImpl implements TicketService {
     RouteService routeService;
 
 
+    public Optional<Ticket> getTicketByOptimalTravel(String from, String to){
+        ArrayList<Route> routes = findOptimalTravel(from, to);
+        if (routes != null && routes.size() > 0 ) {
+            Integer countOfSegments = getCountOfSegments(routes);
+            Ticket ticket = new Ticket(getTravelPoints(routes),
+                    countOfSegments, calculatePrice(countOfSegments));
+            return Optional.of(ticket);
+        } else return Optional.empty();
+    }
 
 
-    public BigDecimal  calculatePrice(Integer numberOfSegments){
+    private boolean isPointsValid(String[] points) {
+        log.info("Input cities validation");
+        for(String point: points){
+            if(!(routeService.findAllRoutesByStart(point.toUpperCase()).size() > 0)){
+                log.info("Incorrect value of city " + point);
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private BigDecimal  calculatePrice(Integer numberOfSegments){
         log.info("Calculate price");
         int mod = 0;
         if (numberOfSegments % 3 > 0){
@@ -36,40 +57,43 @@ public class TicketServiceImpl implements TicketService {
         return BigDecimal.valueOf(intPrice);
     }
 
-    public Integer getCountOfSegments(ArrayList<Route> routes){
-        return routes.stream().mapToInt(r -> r.getNumberOfSegments()).sum();
+    private Integer getCountOfSegments(ArrayList<Route> routes){
+        return routes.stream().mapToInt(Route::getNumberOfSegments).sum();
     }
 
-    public String getTravelPoints(ArrayList<Route> routes){
-        String points = "";
+    private String getTravelPoints(ArrayList<Route> routes){
+        StringBuilder points = new StringBuilder();
         for(Route r: routes){
-            points += r.getStartPoint() + " - ";
+            points.append(r.getStartPoint()).append(" - ");
         }
-        points += routes.get(routes.size()-1).getEndPoint();
-        return points;
+        points.append(routes.get(routes.size() - 1).getEndPoint());
+        return points.toString();
     }
 
-    public ArrayList<Route> findOptimalTravel(String from, String to) {
-        log.info("Find Optimal travel from " + from + " to " + to );
-        optimalRoutes = new ArrayList<>();
-        optimalCount = 100;
-        ArrayList<String> traversedCities = new ArrayList<>();
-        traversedCities.add(from);
-        return getRoute(from, to, traversedCities, new ArrayList<>());
+    private ArrayList<Route> findOptimalTravel(String from, String to) {
+        if (isPointsValid(new String[]{from, to})){
+            log.info("Find Optimal travel from " + from + " to " + to );
+            optimalRoutes = new ArrayList<>();
+            optimalCount = 100;
+            ArrayList<String> traversedCities = new ArrayList<>();
+            traversedCities.add(from.toUpperCase());
+            getRoute(from.toUpperCase(), to.toUpperCase(), traversedCities, new ArrayList<>());
+        } else {
+            log.info("Invalid input values");
+        }
+        return optimalRoutes;
     }
 
-//todo void
-    private ArrayList<Route> getRoute(String from, String to, ArrayList<String> traversedCities, ArrayList<Route> routeForTicket) {
+    private void getRoute(String from, String to, ArrayList<String> traversedCities, ArrayList<Route> routeForTicket) {
         ArrayList<Route> routes = (ArrayList<Route>) routeService
                 .findAllRoutesByStartPointExcludeEndpoints(from, traversedCities);
         for (Route r : routes) {
-            ArrayList<Route> routeTicket = new ArrayList<Route>();
-            routeTicket.addAll(routeForTicket);
+            ArrayList<Route> routeTicket = new ArrayList<>(routeForTicket);
             Optional<Route> optionalRoute = routes.stream()
                     .filter(x -> x.getEndPoint().equals(to)).findFirst();
             if (optionalRoute.isPresent()) {
                 routeTicket.add(optionalRoute.get());
-                if (getCountOfSegments(routeForTicket) < optimalCount) {
+                if (getCountOfSegments(routeTicket) < optimalCount) {
                     optimalCount = getCountOfSegments(routeTicket);
                     optimalRoutes = routeTicket;
                 }
@@ -79,7 +103,6 @@ public class TicketServiceImpl implements TicketService {
                 getRoute(r.getEndPoint(), to, traversedCities, routeTicket);
             }
         }
-        return optimalRoutes;
     }
 
 

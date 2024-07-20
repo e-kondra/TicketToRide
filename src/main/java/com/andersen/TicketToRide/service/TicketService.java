@@ -1,14 +1,9 @@
 package com.andersen.TicketToRide.service;
 
-import com.andersen.TicketToRide.model.Route;
+import com.andersen.TicketToRide.model.Ticket;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
+import java.util.Optional;
 
 public interface TicketService {
-    ArrayList<Route> findOptimalTravel(String from, String to);
-    BigDecimal calculatePrice(Integer numberOfSegments);
-    Integer getCountOfSegments(ArrayList<Route> routes);
-    String getTravelPoints(ArrayList<Route> routes);
-
+    Optional<Ticket> getTicketByOptimalTravel(String from, String to);
 }
