@@ -39,7 +39,7 @@ public class Ticket {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "traveller_id")
-    private Traveller traveller;
+    private CustomUser traveller;
 
     public Ticket(String routesChain, Integer segments, BigDecimal price) {
         this.routesChain = routesChain;

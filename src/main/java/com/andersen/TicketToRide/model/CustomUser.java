@@ -19,7 +19,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "travellers")
-public class Traveller {
+public class CustomUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,6 +31,9 @@ public class Traveller {
 
     @Column(name="password")
     private String password;
+
+    @Column(name="role")
+    private String role;
 
     @OneToMany(mappedBy = "traveller", fetch = FetchType.LAZY)
     private List<Ticket> tickets;
