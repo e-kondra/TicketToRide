@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Optional;
 
 
@@ -59,6 +60,31 @@ public class TicketServiceImpl implements TicketService {
         } else return Optional.empty();
     }
 
+    /**
+     * Checks if the provided amount is sufficient to cover the price of a ticket.
+     *
+     * This method compares the given amount with the price of the ticket based on its segments.
+     * If the amount is sufficient, the result will indicate success and provide the change.
+     * If the amount is insufficient, the result will indicate failure and specify the lacking amount.
+     *
+     * @param amount the amount of money provided by the user
+     * @param ticket the Ticket object containing the details of the travel segments and price
+     *
+     * @return a HashMap containing the result ("success" or "failure"), the change or lacking amount, and the currency ("GBP")
+     */
+    public HashMap<String, String> checkAmount(Float amount, Ticket ticket){
+        HashMap<String, String> result = new HashMap<>();
+        if (BigDecimal.valueOf(amount).compareTo(calculatePrice(ticket.getSegments())) >= 0){
+            result.put("result", "success");
+            result.put("change", BigDecimal.valueOf(amount).subtract(ticket.getPrice()).setScale(2).toString());
+            result.put("currency", "GBP");
+        } else{
+            result.put("result", "failure");
+            result.put("lackOf", ticket.getPrice().subtract(BigDecimal.valueOf(amount)).setScale(2).toString());
+            result.put("currency", "GBP");
+        }
+        return result;
+    }
 
     private boolean isPointsValid(String[] points) {
         log.info("Input cities validation");
@@ -82,7 +108,7 @@ public class TicketServiceImpl implements TicketService {
      *
      * @return the calculated price as a BigDecimal
      */
-    private BigDecimal  calculatePrice(Integer numberOfSegments){
+    private BigDecimal calculatePrice(Integer numberOfSegments){
         log.info("Calculate price");
         int mod = 0;
         if (numberOfSegments % 3 > 0){
@@ -173,6 +199,7 @@ public class TicketServiceImpl implements TicketService {
             }
         }
     }
+
 
 
 }
