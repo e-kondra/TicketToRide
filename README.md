@@ -7,14 +7,14 @@ Developing application which allows to find the most optimal travel between two 
      Java 21, Spring Boot, Spring Data, Spring Security, JUnit 5, Mockito, PostgreSQL, Maven
 
 <h3>How to use:</h3>
-<br>After the cloning this repository you have to configure DataBase properties in application.properties file
+<br>After the cloning this repository you have to configure DataBase properties in application.properties file;
 <br>When starting the application, the Configuration loads primary list of roads from the routes.txt file,
-according to Roads Schema into the database.
-<br>To find an optimal travel go to /api/find_ticket end point and specify point From and point To
-<br>To buy a ticket you have to provide your selected ticket and amount you going to pay at the /api/ticket endpoint.
-<br>It is necessary to be authenticated user to buy a ticket at the /api/ticket endpoint.
-<br>To register follow to register/traveller endpoint
-<br>Task description you can find in TicketToRide.pdf file
+according to Roads Schema into the database;
+<br>To find an optimal travel go to /api/find_ticket end point and specify point From and point To;
+<br>To buy a ticket you have to provide your selected ticket and amount you going to pay at the /api/ticket endpoint;
+<br>It is necessary to be authenticated user to buy a ticket at the /api/ticket endpoint;
+<br>To register follow to register/traveller endpoint;
+<br>Task description you can find in TicketToRide.pdf file.
 
 <h3>API endpoints:</h3>
 
