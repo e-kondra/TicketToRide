@@ -1,7 +1,7 @@
 <h2>“TICKET TO RIDE“ application</h2>
 
 <h3>Purpose:</h3>
-Develop an application which allows to find the most optimal travel between two towns and to save the ticket in the storage if traveller has enough money.
+To develop an application which allows to find the most optimal travel between two towns and to save the ticket in the storage if traveller has enough money.
 
 <h3>Technologies:</h3>
      Java 21, Spring Boot, Spring Data, Spring Security, JUnit 5, Mockito, PostgreSQL, Maven
