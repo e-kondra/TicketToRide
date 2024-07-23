@@ -80,8 +80,7 @@ class RouteServiceImplTest {
     @Test
     void findAllRoutesByStartCorner() {
         String from = "VILNIUS";
-        List<Route> routes = new ArrayList<>();
-        when(mockRepository.findAllByStartPoint(any())).thenReturn(routes);
+        when(mockRepository.findAllByStartPoint(any())).thenReturn(Collections.emptyList());
         List<Route> routes2 = service.findAllRoutesByStart(from);
         assertEquals(routes2.size(), 0);
         verify(mockRepository, times(1)).findAllByStartPoint(from);
