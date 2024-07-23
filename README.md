@@ -59,6 +59,5 @@ _Traveller registration_
     {
     "id": 1,
     "username": "traveller",
-    "password": "$2a$10$IuYPFQrnPXyQ792lNwSliupQiCJel4J4KyhiyUYx8evlEVAtQ2h7S",
-    "role": "TRAVELLER"
+    "password": "$2a$10$IuYPFQrnPXyQ792lNwSliupQiCJel4J4KyhiyUYx8evlEVAtQ2h7S"
     }
