@@ -1,6 +1,6 @@
-**“Ticket to ride“ application**
+<h2>“Ticket to ride“ application</h2>
 
-**Functionality:**
+<h3>Functionality:</h3>
 The application provides an API with two endpoints:
 1. Allow to calculate price and find the most optimal travel between two towns.
 2. Check if traveller has enough money and save the ticket in the storage if he/she does.
@@ -9,11 +9,11 @@ Authentication & authorization: Traveller registration endpoint.
    according to Roads Schema into the database.
 
 
-**Technologies:**
-*     Java 21, Spring Boot, Spring Data, Spring Security, JUnit 5, Mockito, PostgreSQL, Maven
+<h3>Technologies:</h3>
+     Java 21, Spring Boot, Spring Data, Spring Security, JUnit 5, Mockito, PostgreSQL, Maven
 
 
-**API endpoints:**
+<h3>API endpoints:</h3>
 
 _Find a ticket_
 * Public endpoint, that allows to calculate price and find the most optimal travel between two towns (points).
