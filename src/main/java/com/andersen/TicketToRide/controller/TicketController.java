@@ -19,7 +19,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 @RestController
-@RequestMapping("api")
+@RequestMapping("/api")
 public class TicketController {
     private static final Logger log = LogManager.getLogger();
     @Autowired
