@@ -30,6 +30,8 @@ _Find a ticket_
 
 _Save a ticket_
 * Private endpoint. Check if traveller has enough money and save the ticket in the storage if he/she does.
+*  URL: /api/ticket
+*   Method: Post
 *    Query parameters: amount
 *    Request example:
    {
