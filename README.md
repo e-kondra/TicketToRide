@@ -1,17 +1,20 @@
 <h2>“Ticket to ride“ application</h2>
 
-<h3>Functionality:</h3>
-The application provides an API with two endpoints:
-1. Allow to calculate price and find the most optimal travel between two towns.
-2. Check if traveller has enough money and save the ticket in the storage if he/she does.
-Authentication & authorization: Traveller registration endpoint.
-3. When starting the application, the Configuration loads a file with the primary list of roads (routes.txt),
-   according to Roads Schema into the database.
-
+<h3>Purpose:</h3>
+Developing application which allows to find the most optimal travel between two towns and to save the ticket in the storage if traveller has enough money.
 
 <h3>Technologies:</h3>
      Java 21, Spring Boot, Spring Data, Spring Security, JUnit 5, Mockito, PostgreSQL, Maven
 
+<h3>How to use:</h3>
+<br>After the cloning this repository you have to configure DataBase properties in application.properties file
+<br>When starting the application, the Configuration loads primary list of roads from the routes.txt file,
+according to Roads Schema into the database.
+<br>To find an optimal travel go to /api/find_ticket end point and specify point From and point To
+<br>To buy a ticket you have to provide your selected ticket and amount you going to pay at the /api/ticket endpoint.
+<br>It is necessary to be authenticated user to buy a ticket at the /api/ticket endpoint.
+<br>To register follow to register/traveller endpoint
+<br>Task description you can find in TicketToRide.pdf file
 
 <h3>API endpoints:</h3>
 
