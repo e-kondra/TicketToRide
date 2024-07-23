@@ -21,12 +21,12 @@ _Find a ticket_
 *  Method: Get
 * Query parameters: from, to 
 * Response example:
-{
- "id": null,
- "routesChain": "LONDON - READING - SWINDON - BRISTOL",
- "price": 25.00,
- "segments": 7
-}
+<br>{
+<br> "id": null,
+<br> "routesChain": "LONDON - READING - SWINDON - BRISTOL",
+<br> "price": 25.00,
+<br> "segments": 7
+<br>}
 
 _Save a ticket_
 * Private endpoint. Check if traveller has enough money and save the ticket in the storage if he/she does.
@@ -34,30 +34,30 @@ _Save a ticket_
 *   Method: Post
 *    Query parameters: amount
 *    Request example:
-   {
-    "id": null,
-    "routesChain": "LONDON - READING - SWINDON - BRISTOL",
-    "segments": 7,
-    "price": 25
-   }  
+   <br>{
+    <br>"id": null,
+    <br>"routesChain": "LONDON - READING - SWINDON - BRISTOL",
+   <br> "segments": 7,
+   <br> "price": 25
+   <br>}  
 *    Response example:
-   {
-    "result": "success",
-    "change": "1.00",
-    "currency": "GBP"
-   }
+   <br>{
+    <br>"result": "success",
+    <br>"change": "1.00",
+    <br>"currency": "GBP"
+  <br> }
 
 _Traveller registration_
  *    URL: /register/traveller
  *    Method: Post
  *    Request example:
-    {
-    "username": "traveller",
-    "password": "12345"
-    }
+   <br> {
+   <br> "username": "traveller",
+   <br> "password": "12345"
+   <br> }
  *    Response example:
-    {
-    "id": 1,
-    "username": "traveller",
-    "password": "$2a$10$IuYPFQrnPXyQ792lNwSliupQiCJel4J4KyhiyUYx8evlEVAtQ2h7S"
-    }
+   <br> {
+    <br>"id": 1,
+    <br>"username": "traveller",
+    <br>"password": "$2a$10$IuYPFQrnPXyQ792lNwSliupQiCJel4J4KyhiyUYx8evlEVAtQ2h7S"
+   <br> }
