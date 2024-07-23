@@ -18,7 +18,6 @@ public class RegisterController {
 
     @PostMapping("/register/traveller")
     public CustomUser createTraveller(@RequestBody CustomUser traveller){
-        traveller.setRole("TRAVELLER");
         traveller.setPassword(passwordEncoder.encode(traveller.getPassword()));
         return  customUserService.saveCustomUser(traveller);
     }

@@ -27,7 +27,6 @@ public class SecurityConfiguration {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers("/api/find_ticket", "register/**").permitAll()
-                        .requestMatchers("/api/ticket").hasRole("TRAVELLER")
                         .anyRequest().authenticated());
         return httpSecurity.formLogin(AbstractAuthenticationFilterConfigurer::permitAll).build();
     }

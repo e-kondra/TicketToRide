@@ -30,7 +30,6 @@ public class CustomUserServiceImpl implements CustomUserService, UserDetailsServ
             return User.builder()
                     .username(userObject.getUsername())
                     .password(userObject.getPassword())
-                    .roles(userObject.getRole())
                     .build();
         } else {
             log.debug("User with username " + username + " is not found");
