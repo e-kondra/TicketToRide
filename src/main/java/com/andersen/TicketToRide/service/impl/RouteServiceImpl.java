@@ -7,9 +7,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpClientErrorException;
+
 
 import java.io.File;
 import java.io.IOException;
@@ -18,23 +17,13 @@ import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 public class RouteServiceImpl implements RouteService {
     private static final Logger log = LogManager.getLogger();
     @Autowired
     RouteRepository routeRepository;
-
-    @Override
-    public Optional<Route> findRouteById(Long id) {
-        return routeRepository.findById(id);
-    }
-
-    @Override
-    public List<Route> findAllRoutes() {
-        return routeRepository.findAll();
-    }
 
     @Override
     public List<Route> findAllRoutesByStartPointExcludeEndpoints( String from, List<String> excluding) {
@@ -48,21 +37,17 @@ public class RouteServiceImpl implements RouteService {
 
 
     @Override
-    public Route findByStartPointAndEndPoint(String startPoint, String endPoint){
-        return routeRepository.findByStartPointAndEndPoint(startPoint, endPoint);
-    }
-
-    @Override
-    public Route saveRoute(Route route) {
+    public Route saveRoute(Route route) throws Exception {
         if (!hasNoMatch(route)) {
-            throw new HttpClientErrorException(HttpStatus.CONFLICT);  //to improve!!!
+            throw new Exception(route + " is already exist");
+        } else {
+            return routeRepository.save(route);
         }
-        return routeRepository.save(route);
     }
 
     public boolean hasNoMatch(Route route) {
         return routeRepository.findAll().stream()
-                .noneMatch(t -> !t.getId().equals(route.getId()) &&
+                .noneMatch(t ->
                         t.getEndPoint().equals(route.getEndPoint()) &&
                         t.getStartPoint().equals(route.getStartPoint()) &&
                         t.getNumberOfSegments() == route.getNumberOfSegments());

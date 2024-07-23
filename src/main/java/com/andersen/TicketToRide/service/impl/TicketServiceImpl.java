@@ -53,9 +53,8 @@ public class TicketServiceImpl implements TicketService {
     public Optional<Ticket> getTicketByOptimalTravel(String from, String to){
         ArrayList<Route> routes = findOptimalTravel(from, to);
         if (routes != null && routes.size() > 0 ) {
-            Integer countOfSegments = getCountOfSegments(routes);
             Ticket ticket = new Ticket(getTravelPoints(routes),
-                    countOfSegments, calculatePrice(countOfSegments));
+                    getCountOfSegments(routes), calculatePrice(getCountOfSegments(routes)));
             return Optional.of(ticket);
         } else return Optional.empty();
     }
@@ -86,7 +85,7 @@ public class TicketServiceImpl implements TicketService {
         return result;
     }
 
-    private boolean isPointsValid(String[] points) {
+    protected boolean isPointsValid(String[] points) {
         log.info("Input cities validation");
         for(String point: points){
             if(!(routeService.findAllRoutesByStart(point.toUpperCase()).size() > 0)){
@@ -108,7 +107,7 @@ public class TicketServiceImpl implements TicketService {
      *
      * @return the calculated price as a BigDecimal
      */
-    private BigDecimal calculatePrice(Integer numberOfSegments){
+    protected BigDecimal calculatePrice(Integer numberOfSegments){
         log.info("Calculate price");
         int mod = 0;
         if (numberOfSegments % 3 > 0){
@@ -119,7 +118,7 @@ public class TicketServiceImpl implements TicketService {
         return BigDecimal.valueOf(intPrice);
     }
 
-    private Integer getCountOfSegments(ArrayList<Route> routes){
+    protected Integer getCountOfSegments(ArrayList<Route> routes){
         return routes.stream().mapToInt(Route::getNumberOfSegments).sum();
     }
 
@@ -133,7 +132,7 @@ public class TicketServiceImpl implements TicketService {
      *
      * @return a String representing the travel points in the format "StartPoint1 - StartPoint2 - ... - EndPoint"
      */
-    private String getTravelPoints(ArrayList<Route> routes){
+    protected String getTravelPoints(ArrayList<Route> routes){
         StringBuilder points = new StringBuilder();
         for(Route r: routes){
             points.append(r.getStartPoint()).append(" - ");
